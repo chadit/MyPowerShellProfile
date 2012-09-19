@@ -1,0 +1,3 @@
+Replace or add these files to the root powershell folder -- typically this is \Documents\WindowsPowerShell
+
+These files call into my custom Microsoft_PowerShell_profile and profile to load settings.

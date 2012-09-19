@@ -1,0 +1,13 @@
+# Set-Alias gits "git status"
+# Set-Alias gita 'git add '
+# Set-Alias gitb 'git branch '
+# Set-Alias gitc 'git commit'
+# Set-Alias gitca 'git commit -a'
+# Set-Alias gitd 'git diff'
+# Set-Alias gito 'git checkout '
+# Set-Alias gitk 'gitk --all&'
+# Set-Alias gitx 'gitx --all'
+# Set-Alias gitp 'git pull'
+# Set-Alias gitpush 'git push'
+# Set-Alias gitr 'git rebase '
+# Set-Alias gitm 'git merge '
