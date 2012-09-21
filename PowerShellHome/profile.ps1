@@ -34,7 +34,7 @@ function Set-LocationFromPath{
 # Setup the $home directory correctly
 $global:dropbox = Test-LocationFromPath("\Users\$env:username\Dropbox")
 $global:skydrive = Test-LocationFromPath("\Users\$env:username\SkyDrive")
-$global:homedir = "$skydrive\Documents\WindowsPowerShell"
+$global:homedir = "$dropbox\Documents\WindowsPowerShell"
 
 # Check for and load profile.
 $location = "$homedir\MyPowerShellProfile\Commands\profile.ps1"

@@ -9,49 +9,71 @@ function TFS-Checkin{
 	tf checkin
 }
 
-function TBASE-Work{
-	#Get from VS TFS
-	#APvX
-	Write-Host "Refreshing Git repos"
-	Neo-APvX 
-	git tf pull
-	Neo-APvXService
-	git tf pull
-	Neo-APvXShare
-	git tf pull
-	Neo-APvX_Db
-	git tf pull
-	Neo-BarcodeServices
-	git tf pull
-	Neo-NeoLabels
-	git tf pull
-	Neo-NeoLabelsCommon 
-	git tf pull
-	Write-Host "Refreshing TFS repos"
-	Neo-NeoRootTFS
-	tf get /recursive
-	Neo-BarcodeRootTFS
-	tf get /recursive
-}
-
-# function TBASE-AllWork{
+# function TBASE-Work{
 	# #Get from VS TFS
 	# #APvX
+	# Write-Host "Refreshing Git repos"
 	# Neo-APvX 
-	# git tpull
+	# git tf pull
 	# Neo-APvXService
-	# git tpull
+	# git tf pull
 	# Neo-APvXShare
-	# git tpull
+	# git tf pull
 	# Neo-APvX_Db
-	# git tpull
+	# git tf pull
 	# Neo-BarcodeServices
 	# git tf pull
 	# Neo-NeoLabels
 	# git tf pull
 	# Neo-NeoLabelsCommon 
 	# git tf pull
+	# Write-Host "Refreshing TFS repos"
+	# Neo-NeoRootTFS
+	# tf get /recursive
+	# Neo-BarcodeRootTFS
+	# tf get /recursive
 # }
+
+function Scan-IpAddress{
+	param([string] $startAddress = "172.20.204.103", $count=254)
+
+	$lastDot = $startAddress.LastIndexOf(".")
+	$subnet = $startAddress.Substring(0, $lastDot+1)
+	$ip = [int] $startAddress.SubString($lastDot + 1)
+
+	Write-Host "IP Address"
+	Write-Host "----------------------------------------"
+	Do { 
+		$address = $subnet + $ip
+		$pingStatus = Get-WmiObject -Class Win32_PingStatus -Filter "Address='$address'"
+		if($pingStatus.StatusCode -eq 0) {
+			"{0,0} {1,5} {2,5}" -f $pingStatus.Address, $pingStatus.StatusCode," ON NETWORK"
+		} else {
+			"{0,0} {1,5} {2,5}" -f $pingStatus.Address, $pingStatus.StatusCode, " xxxxxxxxx"
+		}
+		$ip++
+	} until ($ip -eq $count)
+}
+
+function tbase-allwork{
+	#get from vs tfs 
+	#apvx
+	Write-Host "Refreshing all work Git repos"
+	neo-apvx 
+	git tpull
+	neo-apvxservice
+	git tpull
+	neo-apvxshare
+	git tpull
+	neo-apvx_db
+	git tpull
+	neo-barcodeservices
+	git tpull
+	neo-neolabels
+	git tpull
+	neo-neolabelscommon 
+	git tpull
+}
 
 #Does not work at the moment
 
