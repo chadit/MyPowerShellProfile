@@ -89,6 +89,17 @@ else
 {
 	write-host "could not find Posh-git folder"
 }
+$poshhgProfile = "$homedir\MyPowerShellProfile\modules\posh-hg\profile.example.ps1"
+if (Test-Path $poshhgProfile)
+{
+	write-host "Loading Posh-hg and Locations" -foregroundcolor blue 
+	Import-Module $poshhgProfile 	
+}
+else
+{
+	write-host "could not find Posh-hg folder"
+}
+
 
 $commandsFolder = "$homedir\MyPowerShellProfile\Commands"
 if (Test-Path $commandsFolder)
