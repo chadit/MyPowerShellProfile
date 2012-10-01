@@ -82,7 +82,7 @@ $poshgitProfile = "$homedir\MyPowerShellProfile\modules\posh-git\profile.example
 #write-host $poshgitProfile
 if (Test-Path $poshgitProfile)
 {
-	write-host "Loading Posh-git and Locations" -foregroundcolor blue 
+	write-host "Loading Posh-git and Locations" -foregroundcolor Cyan 
 	Import-Module $poshgitProfile 	
 }
 else
@@ -92,14 +92,13 @@ else
 $poshhgProfile = "$homedir\MyPowerShellProfile\modules\posh-hg\profile.example.ps1"
 if (Test-Path $poshhgProfile)
 {
-	write-host "Loading Posh-hg and Locations" -foregroundcolor blue 
-	Import-Module $poshhgProfile 	
-}
-else
-{
-	write-host "could not find Posh-hg folder"
-}
-
+	 write-host "Loading Posh-hg and Locations" -foregroundcolor Gray 
+	 Import-Module $poshhgProfile 	
+ }
+ else
+ {
+	 write-host "could not find Posh-hg folder"
+ }
 
 $commandsFolder = "$homedir\MyPowerShellProfile\Commands"
 if (Test-Path $commandsFolder)
@@ -118,6 +117,31 @@ else
 {
 	write-host "could not find command folder"
 }
+
+$sqlpsxFolder = "$homedir\MyPowerShellProfile\modules\sqlpsx"
+if(Test-Path $sqlpsxFolder){
+	write-host "Loading SQLpx " -foregroundcolor Gray 
+	# Import-Module "$sqlpsxFolder\adoLib\adoLib.psm1"
+	# Import-Module "$sqlpsxFolder\Agent\Agent.psm1"
+	# Import-Module "$sqlpsxFolder\ISECreamBasic\ISECreamBasic.psm1"
+	# Import-Module "$sqlpsxFolder\mySQLLib\mySQLLib.psm1"
+	# Import-Module "$sqlpsxFolder\OracleClient\OracleClient.psm1"
+	# Import-Module "$sqlpsxFolder\OracleIse\OracleIse.psm1"
+	# Import-Module "$sqlpsxFolder\PBM\PBM.psm1"
+	# Import-Module "$sqlpsxFolder\PerfCounters\PerfCounters.psm1"
+	# Import-Module "$sqlpsxFolder\Repl\Repl.psm1"
+	# Import-Module "$sqlpsxFolder\ShowMbrs\ShowMbrs.psm1"
+	# Import-Module "$sqlpsxFolder\SQLIse\SQLIse.psm1"
+	# Import-Module "$sqlpsxFolder\SQLMaint\SQLMaint.psm1"
+	# Import-Module "$sqlpsxFolder\SQLParser\SQLParser.psm1"
+	# Import-Module "$sqlpsxFolder\SQLProfiler\SQLProfiler.psm1"
+	#Import-Module "$sqlpsxFolder\SQLPSX\SQLPSX.psm1"
+	 Import-Module "$sqlpsxFolder\SQLServer\SQLServer.psm1"
+	# Import-Module "$sqlpsxFolder\SSIS\SSIS.psm1"
+	# Import-Module "$sqlpsxFolder\WPK\WPK.psm1"
+
+}
+
 
 #Set Alias
 Set-Alias home Set-HomeLocation
