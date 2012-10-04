@@ -12,6 +12,7 @@ Set-Alias Neo-BarcodeRootTFS Set-NeoBarcodeRootTFS
 Set-Alias ChlodnyWebApi Set-ChlodnyWebApi
 Set-Alias Dropbox Set-Dropbox
 Set-Alias SkyDrive Set-SkyDrive
+Set-Alias Source Set-Source
 
 #Reference from https://github.com/PProvost/dotfiles/blob/master/powershell/Aliases.ps1
 # Global command aliases
