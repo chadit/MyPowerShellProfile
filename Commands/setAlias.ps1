@@ -6,12 +6,13 @@ Set-Alias Neo-APvX_Db Set-APvX_Db
 Set-Alias Neo-BarcodeServices Set-BarcodeServices
 Set-Alias Neo-NeoLabels Set-NeoLabels
 Set-Alias Neo-NeoLabelsCommon Set-NeoLabelsCommon
-Set-Alias Neo-NeoRootTFS Set-NeoProjectTFS
-Set-Alias Neo-BarcodeRootTFS Set-NeoBarcodeRootTFS
+
+
 
 Set-Alias ChlodnyWebApi Set-ChlodnyWebApi
 Set-Alias Dropbox Set-Dropbox
 Set-Alias SkyDrive Set-SkyDrive
+Set-Alias Source Set-Source
 
 #Reference from https://github.com/PProvost/dotfiles/blob/master/powershell/Aliases.ps1
 # Global command aliases

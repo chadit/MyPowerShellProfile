@@ -9,31 +9,6 @@ function TFS-Checkin{
 	tf checkin
 }
 
-# function TBASE-Work{
-	# #Get from VS TFS
-	# #APvX
-	# Write-Host "Refreshing Git repos"
-	# Neo-APvX 
-	# git tf pull
-	# Neo-APvXService
-	# git tf pull
-	# Neo-APvXShare
-	# git tf pull
-	# Neo-APvX_Db
-	# git tf pull
-	# Neo-BarcodeServices
-	# git tf pull
-	# Neo-NeoLabels
-	# git tf pull
-	# Neo-NeoLabelsCommon 
-	# git tf pull
-	# Write-Host "Refreshing TFS repos"
-	# Neo-NeoRootTFS
-	# tf get /recursive
-	# Neo-BarcodeRootTFS
-	# tf get /recursive
-# }
-
 function Scan-IpAddress{
 	param([string] $startAddress = "172.20.204.103", $count=254)
 
@@ -58,6 +33,7 @@ function Scan-IpAddress{
 function tbase-allwork{
 	#get from vs tfs 
 	#apvx
+	$currentLocation = Get-Location
 	Write-Host "Refreshing all work Git repos"
 	neo-apvx 
 	git tpull
@@ -73,6 +49,7 @@ function tbase-allwork{
 	git tpull
 	neo-neolabelscommon 
 	git tpull
+	Set-Location $currentLocation
 }
 
 #Does not work at the moment
