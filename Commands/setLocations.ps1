@@ -66,3 +66,8 @@ function Set-SkyDrive{
 	$location = "\Users\$env:username\SkyDrive"
 	Set-LocationFromPath ($location)
 }
+
+function Set-Source{
+	$location = "\projects\Source"
+	Set-LocationFromPath($location)
+}
