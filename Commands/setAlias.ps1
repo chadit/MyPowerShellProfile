@@ -7,8 +7,6 @@ Set-Alias Neo-BarcodeServices Set-BarcodeServices
 Set-Alias Neo-NeoLabels Set-NeoLabels
 Set-Alias Neo-NeoLabelsCommon Set-NeoLabelsCommon
 
-
-
 Set-Alias ChlodnyWebApi Set-ChlodnyWebApi
 Set-Alias Dropbox Set-Dropbox
 Set-Alias SkyDrive Set-SkyDrive
