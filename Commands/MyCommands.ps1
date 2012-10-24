@@ -34,22 +34,39 @@ function tbase-allwork{
 	#get from vs tfs 
 	#apvx
 	$currentLocation = Get-Location
-	Write-Host "Refreshing all work Git repos"
+	Write-Host "Refreshing all work Git-tfs repos"
 	neo-apvx 
-	git tpull
+	gitBranchSwitch
 	neo-apvxservice
+	#git checkout master
 	git tpull
 	neo-apvxshare
+	#git checkout master
 	git tpull
 	neo-apvx_db
+	#git checkout master
 	git tpull
 	neo-barcodeservices
+	#git checkout master
 	git tpull
 	neo-neolabels
+	#git checkout master
 	git tpull
-	neo-neolabelscommon 
+	neo-neolabelscommon
+	#git checkout master	
 	git tpull
 	Set-Location $currentLocation
+}
+
+function gitBranchSwitch(){
+	$test = git rev-parse --abbrev-ref HEAD
+	if($test -ne "master"){
+		git checkout master
+	}
+	git tpull
+	if($test -ne "master"){
+		git checkout $test
+	}
 }
 
 #Does not work at the moment

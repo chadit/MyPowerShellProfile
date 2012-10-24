@@ -15,7 +15,7 @@ $Shell.WindowSize = $size
 
 #Get if OS is 32 or 64 bit
 $os=Get-WMIObject win32_operatingsystem
-cls
+#cls
 #Set the default version of Visual Studio to use
 $global:DefaultVisualStudio = "2012"
 write-host "Default Visual Studio is $DefaultVisualStudio" -foregroundcolor yellow 
