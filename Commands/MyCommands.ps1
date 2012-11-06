@@ -30,44 +30,46 @@ function Scan-IpAddress{
 	} until ($ip -eq $count)
 }
 
-function tbase-allwork{
-	#get from vs tfs 
-	#apvx
-	$currentLocation = Get-Location
-	Write-Host "Refreshing all work Git-tfs repos"
-	neo-apvx 
-	gitBranchSwitch
-	neo-apvxservice
-	#git checkout master
-	git tpull
-	neo-apvxshare
-	#git checkout master
-	git tpull
-	neo-apvx_db
-	#git checkout master
-	git tpull
-	neo-barcodeservices
-	#git checkout master
-	git tpull
-	neo-neolabels
-	#git checkout master
-	git tpull
-	neo-neolabelscommon
-	#git checkout master	
-	git tpull
-	Set-Location $currentLocation
-}
+# function tbase-allwork{
+	# #get from vs tfs 
+	# #apvx
+	# $currentLocation = Get-Location
+	# Write-Host "Refreshing all work Git-tfs repos"
+	# # APVX Main App
+	# neo-apvx 
+	# gitBranchSwitch
+	# # APVX Web Services
+	# neo-apvxservice
+	# gitBranchSwitch
+	# # APVX Share Library
+	# neo-apvxshare
+	# gitBranchSwitch
+	# # APVX database
+	# neo-apvx_db
+	# gitBranchSwitch
+	# # APVX Label app services
+	# neo-barcodeservices
+	# gitBranchSwitch
+	# # APVX label main app
+	# neo-neolabels
+	# gitBranchSwitch
+	# # APVX label share library
+	# neo-neolabelscommon
+	# gitBranchSwitch
+	# Set-Location $currentLocation
+# }
 
-function gitBranchSwitch(){
-	$test = git rev-parse --abbrev-ref HEAD
-	if($test -ne "master"){
-		git checkout master
-	}
-	git tpull
-	if($test -ne "master"){
-		git checkout $test
-	}
-}
+# function gitBranchSwitch(){
+	# $test = git rev-parse --abbrev-ref HEAD
+	# if($test -ne "master"){
+		# git checkout master
+	# }
+	# git tpull
+	# if($test -ne "master"){
+		# git checkout $test
+		# git merge master --no-ff
+	# }
+# }
 
 #Does not work at the moment
 

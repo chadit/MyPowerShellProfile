@@ -24,8 +24,8 @@ write-host "Default Visual Studio is $DefaultVisualStudio" -foregroundcolor yell
 $global:documentPath = [environment]::GetFolderPath([environment+SpecialFolder]::MyDocuments) 
 
 # Helper functions for user/computer session management
-function Invoke-Shutdown { &"$env:SystemRoot\System32\shutdown.exe" -s }
-function Invoke-Reboot { &"$env:SystemRoot\System32\shutdown.exe" -r }
+function Invoke-Shutdown { &"$env:SystemRoot\System32\shutdown.exe" -s -t 1}
+function Invoke-Reboot { &"$env:SystemRoot\System32\shutdown.exe" -r -t 1}
 function Invoke-Logoff { &"$env:SystemRoot\System32\shutdown.exe" -l }
 function Invoke-Standby { &"$env:SystemRoot\System32\rundll32.exe" powrprof.dll,SetSuspendState Standby }
 function Invoke-Hibernate { &"$env:SystemRoot\System32\rundll32.exe" powrprof.dll,SetSuspendState Hibernate }

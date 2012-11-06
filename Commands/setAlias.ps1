@@ -26,9 +26,9 @@ set-alias sudo Invoke-Elevated
 set-alias unset remove-variable
 set-alias whence get-commandInfoEx
 
-set-alias logout invoke-userLogout
-set-alias shutdown invoke-systemShutdown
-set-alias restart invoke-systemReboot
+set-alias logout Invoke-Logoff
+set-alias shutdown Invoke-Shutdown
+set-alias restart Invoke-Reboot
 if (test-path alias:\sleep) { remove-item alias:\sleep -force }
-set-alias sleep invoke-systemSleep -force
+set-alias sleep Invoke-Hibernate -force
 set-alias lock invoke-terminalLock
