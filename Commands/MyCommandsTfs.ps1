@@ -1,0 +1,4 @@
+function tfclone(){
+	param ($repoPath)
+
+}

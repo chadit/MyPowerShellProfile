@@ -1,54 +1,70 @@
-# Set-Alias gits "git status"
-# Set-Alias gita 'git add '
-# Set-Alias gitb 'git branch '
-# Set-Alias gitc 'git commit'
-# Set-Alias gitca 'git commit -a'
-# Set-Alias gitd 'git diff'
-# Set-Alias gito 'git checkout '
-# Set-Alias gitk 'gitk --all&'
-# Set-Alias gitx 'gitx --all'
-# Set-Alias gitp 'git pull'
-# Set-Alias gitpush 'git push'
-# Set-Alias gitr 'git rebase '
-# Set-Alias gitm 'git merge '
-
 function tbase-gitallworkrepo{
-	#get from vs tfs 
-	#apvx
+	cls #clear console
 	$currentLocation = Get-Location
-	Write-Host "Refreshing all work Git-tfs repos"
-	# APVX Main App
-	neo-apvx 
+	Write-Host "************************************************************ `n `tRefreshing all work Git-tfs repos `n************************************************************"
+	neo-apvx # APVX Main App
 	gitBranchSwitch
-	# APVX Web Services
-	neo-apvxservice
+	neo-apvxservice # APVX Web Services
 	gitBranchSwitch
-	# APVX Share Library
-	neo-apvxshare
+	neo-apvxshare # APVX Share Library
 	gitBranchSwitch
-	# APVX database
-	neo-apvx_db
+	neo-apvx_db # APVX database
 	gitBranchSwitch
-	# APVX Label app services
-	neo-barcodeservices
+	neo-barcodeservices # APVX Label app services
 	gitBranchSwitch
-	# APVX label main app
-	neo-neolabels
+	neo-neolabels # APVX label main app
 	gitBranchSwitch
-	# APVX label share library
-	neo-neolabelscommon
+	neo-neolabelscommon # APVX label share library
 	gitBranchSwitch
 	Set-Location $currentLocation
 }
 
 function gitBranchSwitch(){
-	 $test = git rev-parse --abbrev-ref HEAD
-	 if($test -ne "master"){
+	 $startBranch = git rev-parse --abbrev-ref HEAD
+	 $errorCheckHandler = 0
+	 if($startBranch -ne "master"){
 		 git checkout master
 	 }
-	 git tpull
-	 if($test -ne "master"){
-		 git checkout $test
-		 git merge master --no-ff
-	 }
+	 $pullTest = git tpull
+	 if($pullTest -eq $null)
+		{
+			write-host "************************************************************ `n `tError occured in pull request see message `n************************************************************" -Fore Red 
+			$errorCheckHandler = 1
+		}else{
+			write-host $pullTest -Fore DarkGreen
+			if($startBranch -ne "master"){
+				gitRevertBackToStartingBranch $startBranch
+			}			
+		}
+}
+
+function gitRevertBackToStartingBranch(){
+	param ($startBranch)
+
+	if($startBranch -ne "develop"){
+		gitCheckForDevelopBranch
+	}
+	
+	git checkout $startBranch
+	gitBranchMerge
+}
+
+function gitCheckForDevelopBranch(){
+	$branches=$(git branch | sed 's/\(\*| \)//g')
+	$testIfDevelopExist = $branches -match "develop"
+	if($testIfDevelopExist -ne $false){
+		Write-Host "develop branch exist, merging with master"	-foregroundcolor Yellow 
+		git checkout develop
+		gitBranchMerge
+	}
+}
+
+function gitBranchMerge(){
+	$mergeTest = git merge master --no-ff
+	if($mergeTest -eq $null)
+	{
+		write-host $mergeTest -foregroundcolor Red 
+	}else{
+		write-host $mergeTest -Fore Cyan
+	}
 }

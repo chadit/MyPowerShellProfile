@@ -30,46 +30,32 @@ function Scan-IpAddress{
 	} until ($ip -eq $count)
 }
 
-# function tbase-allwork{
-	# #get from vs tfs 
-	# #apvx
-	# $currentLocation = Get-Location
-	# Write-Host "Refreshing all work Git-tfs repos"
-	# # APVX Main App
-	# neo-apvx 
-	# gitBranchSwitch
-	# # APVX Web Services
-	# neo-apvxservice
-	# gitBranchSwitch
-	# # APVX Share Library
-	# neo-apvxshare
-	# gitBranchSwitch
-	# # APVX database
-	# neo-apvx_db
-	# gitBranchSwitch
-	# # APVX Label app services
-	# neo-barcodeservices
-	# gitBranchSwitch
-	# # APVX label main app
-	# neo-neolabels
-	# gitBranchSwitch
-	# # APVX label share library
-	# neo-neolabelscommon
-	# gitBranchSwitch
-	# Set-Location $currentLocation
+# function Set-WallpaperRemote{
+  # param([string] $computerName = "fmmistsmith"
+  
+  # Const HKEY_CURRENT_USER = &H80000001
+  
+  # Set objReg = GetObject("winmgmts:\\" & computerName & "\root\default:StdRegProv")
+  
+  
 # }
 
-# function gitBranchSwitch(){
-	# $test = git rev-parse --abbrev-ref HEAD
-	# if($test -ne "master"){
-		# git checkout master
-	# }
-	# git tpull
-	# if($test -ne "master"){
-		# git checkout $test
-		# git merge master --no-ff
-	# }
+# Function Get-WallPaper()
+# {
+ # $wp=Get-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name wallpaper
+ # if(!$wp.WallPaper) 
+   # { "Wall paper is not set" }
+ # Else
+  # {"Wall paper is set to $($wp.WallPaper)" }
 # }
+
+# Function Set-WallPaper($Value)
+# {
+ # Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name wallpaper -value $value
+ # rundll32.exe user32.dll, UpdatePerUserSystemParameters
+# }
+
+
 
 #Does not work at the moment
 
