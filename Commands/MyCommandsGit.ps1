@@ -2,21 +2,17 @@ function tbase-gitallworkrepo{
 	cls #clear console
 	$currentLocation = Get-Location
 	Write-Host "************************************************************ `n `tRefreshing all work Git-tfs repos `n************************************************************"
-	neo-apvx # APVX Main App
-	gitBranchSwitch
-	neo-apvxservice # APVX Web Services
-	gitBranchSwitch
-	neo-apvxshare # APVX Share Library
-	gitBranchSwitch
-	neo-apvx_db # APVX database
-	gitBranchSwitch
-	neo-barcodeservices # APVX Label app services
-	gitBranchSwitch
-	neo-neolabels # APVX label main app
-	gitBranchSwitch
-	neo-neolabelscommon # APVX label share library
-	gitBranchSwitch
+	$gitArrayWork = ("neo-apvx","neo-apvxservice","neo-apvxshare","neo-apvx_db","neo-barcodeservices","neo-neolabels","neo-neolabelscommon")
+	gitCheckForUpdate $gitArrayWork
 	Set-Location $currentLocation
+}
+
+function gitCheckForUpdate(){
+	param ($gitArray)
+	foreach($repo in $gitArray){
+		&$repo	
+		gitBranchSwitch
+	}
 }
 
 function gitBranchSwitch(){
