@@ -37,6 +37,11 @@ function Set-NeoLabelsCommon{
 	Set-LocationFromPath ($location)
 }
 
+function Set-NeoDocumentManagement{
+	$location = "\Projects\Work\NeoGen\DocumentManagment"
+	Set-LocationFromPath ($location)
+}
+
 function Set-TfsNeoProject{
 	$location = "\Projects\Work\NeoGenomics"
 	Set-LocationFromPath($location)

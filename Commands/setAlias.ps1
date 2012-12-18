@@ -6,6 +6,7 @@ Set-Alias Neo-APvX_Db Set-APvX_Db # APVX database
 Set-Alias Neo-BarcodeServices Set-BarcodeServices # APVX Label app services
 Set-Alias Neo-NeoLabels Set-NeoLabels # APVX label main app
 Set-Alias Neo-NeoLabelsCommon Set-NeoLabelsCommon # APVX label share library
+Set-Alias Neo-DocumentMgmt Set-NeoDocumentManagement # Document Locator
 
 Set-Alias ChlodnyWebApi Set-ChlodnyWebApi
 Set-Alias Dropbox Set-Dropbox

@@ -3,11 +3,11 @@ function ShutDownRemote{
 	Stop-Computer -ComputerName $ComputerName -Force
 }
 
-function TFS-Checkin{
-	Neo-NeoRootTFS
-	tf get /recursive
-	tf checkin
-}
+# function TFS-Checkin{
+	# Neo-NeoRootTFS
+	# tf get /recursive
+	# tf checkin
+# }
 
 function Scan-IpAddress{
 	param([string] $startAddress = "172.20.204.103", $count=254)

@@ -2,7 +2,7 @@ function tbase-gitallworkrepo{
 	cls #clear console
 	$currentLocation = Get-Location
 	Write-Host "************************************************************ `n `tRefreshing all work Git-tfs repos `n************************************************************"
-	$gitArrayWork = ("neo-apvx","neo-apvxservice","neo-apvxshare","neo-apvx_db","neo-barcodeservices","neo-neolabels","neo-neolabelscommon")
+	$gitArrayWork = ("neo-apvx","neo-apvxservice","neo-apvxshare","neo-apvx_db","neo-barcodeservices","neo-neolabels","neo-neolabelscommon", "Neo-DocumentMgmt")
 	gitCheckForUpdate $gitArrayWork
 	Set-Location $currentLocation
 }
@@ -10,7 +10,8 @@ function tbase-gitallworkrepo{
 function gitCheckForUpdate(){
 	param ($gitArray)
 	foreach($repo in $gitArray){
-		&$repo	
+		# &$repo	#switched to invoke-expression handles things a little better
+		Invoke-Expression $repo
 		gitBranchSwitch
 	}
 }
