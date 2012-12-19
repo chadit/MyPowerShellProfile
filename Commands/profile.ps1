@@ -7,9 +7,11 @@
 
 # A couple of directory variables for convenience
 
+$global:isDebugMode = "false"
 
-
-
+function Write-DebugMessage([string] $message){
+	write-host $message -ForegroundColor Black -BackgroundColor White
+}
 
 
 
