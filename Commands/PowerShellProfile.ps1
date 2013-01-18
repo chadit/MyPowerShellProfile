@@ -15,6 +15,7 @@ $Shell.WindowSize = $size
 
 #Get if OS is 32 or 64 bit
 $os=Get-WMIObject win32_operatingsystem
+
 #cls
 #Set the default version of Visual Studio to use
 $global:DefaultVisualStudio = "2012"
@@ -52,7 +53,7 @@ function Set-HomeLocation{
 	Set-Location $homedir
 }
 
-function Invoke-pscx{
+#function Import-PowerShellCommunityExtensions(){
 	$scripts = resolve-path "$homedir\MyPowerShellProfile\"
 	$pscxUserPreference = "$scripts\modules\Pscx\"
 
@@ -63,91 +64,96 @@ function Invoke-pscx{
 	write-Host "Loading Pscx Extensions"
 	Import-Module "Pscx" -Arg (join-path $pscxUserPreference Pscx.UserPreferences.ps1)
 	write-host "PowerShell Community Extensions $($Pscx:Version) is Loaded" -foregroundcolor yellow 
-}
+#}
+
+#function Import-PoshGitProfile{
+	$poshgitProfile = "$homedir\MyPowerShellProfile\modules\posh-git\profile.example.ps1"
+	#write-host $poshgitProfile
+	if (Test-Path $poshgitProfile)
+	{		
+		write-host "Loading Posh-git" -foregroundcolor Cyan 
+		Import-Module $poshgitProfile 	
+	}
+	else
+	{
+		write-host "could not find Posh-git folder"
+	}
+#}
+
+#function Import-PoshHGProfile{
+	$poshhgProfile = "$homedir\MyPowerShellProfile\modules\posh-hg\profile.example.ps1"
+	if (Test-Path $poshhgProfile)
+	{
+		 write-host "Loading Posh-hg and Locations" -foregroundcolor Gray 
+		 Import-Module $poshhgProfile 	
+	 }
+	 else
+	 {
+		 write-host "could not find Posh-hg folder"
+	 }
+#}
+
+#function Import-CustomCommands{
+	$commandsFolder = "$homedir\MyPowerShellProfile\Commands\Modules"
+	if (Test-Path $commandsFolder)
+	{	
+		Import-Module $commandsFolder\CleanUpDocuments
+		Import-Module $commandsFolder\MyCommands
+		Import-Module $commandsFolder\MyCommandsGit
+		Import-Module $commandsFolder\MyCommandsTfs
+		Import-Module $commandsFolder\path
+		Import-Module $commandsFolder\setLocations
+		Import-Module $commandsFolder\startApplication
+	}
+	else
+	{
+		write-host "could not find command folder"
+	}
+#}
+
+#function Import-SQLPowerShellExtension{
+	$sqlpsxFolder = "$homedir\MyPowerShellProfile\modules\sqlpsx"
+	if(Test-Path $sqlpsxFolder){
+		write-host "Loading SQLpx " -foregroundcolor Gray 
+		# Import-Module "$sqlpsxFolder\adoLib\adoLib.psm1"
+		# Import-Module "$sqlpsxFolder\Agent\Agent.psm1"
+		# Import-Module "$sqlpsxFolder\ISECreamBasic\ISECreamBasic.psm1"
+		# Import-Module "$sqlpsxFolder\mySQLLib\mySQLLib.psm1"
+		# Import-Module "$sqlpsxFolder\OracleClient\OracleClient.psm1"
+		# Import-Module "$sqlpsxFolder\OracleIse\OracleIse.psm1"
+		# Import-Module "$sqlpsxFolder\PBM\PBM.psm1"
+		# Import-Module "$sqlpsxFolder\PerfCounters\PerfCounters.psm1"
+		# Import-Module "$sqlpsxFolder\Repl\Repl.psm1"
+		# Import-Module "$sqlpsxFolder\ShowMbrs\ShowMbrs.psm1"
+		# Import-Module "$sqlpsxFolder\SQLIse\SQLIse.psm1"
+		# Import-Module "$sqlpsxFolder\SQLMaint\SQLMaint.psm1"
+		# Import-Module "$sqlpsxFolder\SQLParser\SQLParser.psm1"
+		# Import-Module "$sqlpsxFolder\SQLProfiler\SQLProfiler.psm1"
+		#Import-Module "$sqlpsxFolder\SQLPSX\SQLPSX.psm1"
+		 Import-Module "$sqlpsxFolder\SQLServer\SQLServer.psm1"
+		# Import-Module "$sqlpsxFolder\SSIS\SSIS.psm1"
+		# Import-Module "$sqlpsxFolder\WPK\WPK.psm1"
+	}
+#}
+
 
 #Set the windows title
 Set-TitleBar
-Invoke-pscx
 Set-HomeLocation
 
-Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
-
-Pop-Location
-
-
-# Load posh-git example profile
-
-#todo add a check to see if git is even installed
-$poshgitProfile = "$homedir\MyPowerShellProfile\modules\posh-git\profile.example.ps1"
-#write-host $poshgitProfile
-if (Test-Path $poshgitProfile)
-{
-	write-host "Loading Posh-git and Locations" -foregroundcolor Cyan 
-	Import-Module $poshgitProfile 	
-}
-else
-{
-	write-host "could not find Posh-git folder"
-}
-$poshhgProfile = "$homedir\MyPowerShellProfile\modules\posh-hg\profile.example.ps1"
-if (Test-Path $poshhgProfile)
-{
-	 write-host "Loading Posh-hg and Locations" -foregroundcolor Gray 
-	 Import-Module $poshhgProfile 	
- }
- else
- {
-	 write-host "could not find Posh-hg folder"
- }
-
-$commandsFolder = "$homedir\MyPowerShellProfile\Commands"
-if (Test-Path $commandsFolder)
-{
-	Import-Module "$commandsFolder\CleanUpDocuments.ps1"
-	Import-Module "$commandsFolder\MyCommands.ps1"
-	Import-Module "$commandsFolder\MyCommandsGit.ps1"
-	Import-Module "$commandsFolder\MyCommandsTfs.ps1"
-	Import-Module "$commandsFolder\path.ps1"
-	Import-Module "$commandsFolder\setAlias.ps1"
-	Import-Module "$commandsFolder\setLocations.ps1"
-	Import-Module "$commandsFolder\startApplication.ps1"
-	
-}
-else
-{
-	write-host "could not find command folder"
-}
-
-$isSqlServerInstalled = "C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn"
+#Load modules
+#Import-PowerShellCommunityExtensions 
+#Import-PoshGitProfile
+#Import-PoshHGProfile
+#Import-CustomCommands
+#Import-SQLPowerShellExtension
 
 
+#Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
+#Pop-Location
 
-$sqlpsxFolder = "$homedir\MyPowerShellProfile\modules\sqlpsx"
-if(Test-Path $sqlpsxFolder){
-	write-host "Loading SQLpx " -foregroundcolor Gray 
-	# Import-Module "$sqlpsxFolder\adoLib\adoLib.psm1"
-	# Import-Module "$sqlpsxFolder\Agent\Agent.psm1"
-	# Import-Module "$sqlpsxFolder\ISECreamBasic\ISECreamBasic.psm1"
-	# Import-Module "$sqlpsxFolder\mySQLLib\mySQLLib.psm1"
-	# Import-Module "$sqlpsxFolder\OracleClient\OracleClient.psm1"
-	# Import-Module "$sqlpsxFolder\OracleIse\OracleIse.psm1"
-	# Import-Module "$sqlpsxFolder\PBM\PBM.psm1"
-	# Import-Module "$sqlpsxFolder\PerfCounters\PerfCounters.psm1"
-	# Import-Module "$sqlpsxFolder\Repl\Repl.psm1"
-	# Import-Module "$sqlpsxFolder\ShowMbrs\ShowMbrs.psm1"
-	# Import-Module "$sqlpsxFolder\SQLIse\SQLIse.psm1"
-	# Import-Module "$sqlpsxFolder\SQLMaint\SQLMaint.psm1"
-	# Import-Module "$sqlpsxFolder\SQLParser\SQLParser.psm1"
-	# Import-Module "$sqlpsxFolder\SQLProfiler\SQLProfiler.psm1"
-	#Import-Module "$sqlpsxFolder\SQLPSX\SQLPSX.psm1"
-	 Import-Module "$sqlpsxFolder\SQLServer\SQLServer.psm1"
-	# Import-Module "$sqlpsxFolder\SSIS\SSIS.psm1"
-	# Import-Module "$sqlpsxFolder\WPK\WPK.psm1"
+#$isSqlServerInstalled = "C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn"
 
-}
-
-
-#Set Alias
-Set-Alias home Set-HomeLocation
+Import-Module $homedir\MyPowerShellProfile\Commands\setAlias.ps1
 
 #cls

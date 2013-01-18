@@ -1,6 +1,14 @@
-function tbase-gitallworkrepo([string]$debug){
+function get-tbasegitallworkrepodebug{
+	$isDebugMode = "true"
+	get-tbasegitallworkrepo "true"
+}
+
+function get-tbasegitallworkrepo{
+param ([string]$debug)
 	if($debug -ne ""){
 		$isDebugMode = $debug
+	}else{
+		$isDebugMode = "true"
 	}
 	
 	cls #clear console
@@ -17,27 +25,34 @@ function tbase-gitallworkrepo([string]$debug){
 		Write-DebugMessage "Repository array collection is `n"$gitAttayWork
 	}
 	
-	gitCheckForUpdate $gitArrayWork
+	invoke-gitCheckForUpdate $gitArrayWork
 	Set-Location $currentLocation
 	
 	$isDebugMode = "false"
 }
 
-function gitCheckForUpdate(){
+function invoke-gitCheckForUpdate{
 	param ($gitArray)
 	foreach($repo in $gitArray){
 		if($isDebugMode -eq "true"){
 			Write-DebugMessage "Invoking $repo"
 		}
-		# &$repo	#switched to invoke-expression handles things a little better
-		Invoke-Expression $repo
-		gitBranchSwitch
+		# &$repo	
+		#switched to invoke-expression handles things a little better
+		#if (Test-Path $repo){
+			Invoke-Expression $repo
+			set-gitBranchSwitch
+		#}else{
+		#	Write-Host "$repo was not found"
+		#}
 	}
 }
 
-function gitBranchSwitch(){
+
+
+function set-gitBranchSwitch{
 	$startBranch = git rev-parse --abbrev-ref HEAD
-	$startBranch = parseOutStar $startBranch
+	$startBranch = format-parseOutStar $startBranch
 	
 	if($isDebugMode -eq "true"){
 		Write-DebugMessage "The starting branch is $startBranch"
@@ -51,15 +66,15 @@ function gitBranchSwitch(){
 		git checkout master
 	}
 	
-	gitpullLatestChanges
+	get-pullLatestChanges
 	
 	if($startBranch -ne "master"){			
-		gitRevertBackToStartingBranch $startBranch
+		set-RevertBackToStartingBranch $startBranch
 	}
 	
 }
 
-function gitpullLatestChanges(){
+function get-pullLatestChanges{
 	$pullTest = git tpull
 	if($pullTest -eq $null){
 		write-host "************************************************************ `n `tError occured in pull request see message `n************************************************************" -Fore Red 
@@ -71,12 +86,13 @@ function gitpullLatestChanges(){
 		}
 		
 		# Only do a merge with other branches if no errors occur on master
-		gitCheckForOtherBranches
+		Find-CheckForOtherBranches
 	}
 
 }
 
-function parseOutStar([string] $stringValue){
+function format-parseOutStar{
+param ([string] $stringValue)
 	if($stringValue -match "\*"){
 		return $stringValue.Replace('*', '').Trim()
 	}else{
@@ -84,7 +100,7 @@ function parseOutStar([string] $stringValue){
 	}
 }
 
-function gitRevertBackToStartingBranch(){
+function set-RevertBackToStartingBranch{
 	param ($startBranch)
 
 	if($isDebugMode -eq "true"){
@@ -93,14 +109,14 @@ function gitRevertBackToStartingBranch(){
 	git checkout $startBranch 
 }
 
-function gitCheckForOtherBranches(){
+function Find-CheckForOtherBranches{
 	$branches=$(git branch | sed 's/\(\*| \)//g')
 	if($isDebugMode -eq "true"){
 		Write-DebugMessage "Checking for other branches, they are $branch"
 	}
 	
 	foreach($b in $branches){
-		$b = parseOutStar $b
+		$b = format-parseOutStar $b
 		if($b -notlike "master"){
 			Write-Host "Switch\Merge master into $b" -foregroundcolor Yellow 	 			
 						
@@ -110,7 +126,7 @@ function gitCheckForOtherBranches(){
 				Write-DebugMessage "Branch is currently set to $b"
 			}
 			
-			gitBranchMerge
+			Set-BranchMerge
 			
 			if($isDebugMode -eq "true"){
 				Write-DebugMessage "merge complete on $b"
@@ -119,7 +135,7 @@ function gitCheckForOtherBranches(){
 	}
 }
 
-function gitBranchMerge(){
+function Set-BranchMerge{
 	if($isDebugMode -eq "true"){
 		Write-DebugMessage "Merging current branch with master"
 	}
@@ -131,3 +147,12 @@ function gitBranchMerge(){
 		write-host $mergeTest -Fore DarkGreen
 	}
 }
+
+
+#Set-Item –Path Function:invoke-gitCheckForUpdate –Options Private
+#Set-Item –Path Function:set-gitBranchSwitch –Options Private
+#Set-Item –Path Function:get-pullLatestChanges –Options Private
+#Set-Item –Path Function:format-parseOutStar –Options Private
+#Set-Item –Path Function:set-RevertBackToStartingBranch –Options Private
+#Set-Item –Path Function:Find-CheckForOtherBranches –Options Private
+#Set-Item –Path Function:Set-BranchMerge –Options Private

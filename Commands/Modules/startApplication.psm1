@@ -1,5 +1,5 @@
 # Function will find the sln file in the currently directory and launch it
-function Start-Solution{
+function Invoke-Solution{
 	param ($VsSwitch)
 	$application = Get-ChildItem $PWD\*.* -Include *.sln
 	
@@ -37,7 +37,7 @@ function Start-Solution{
 	}
 }
 
-function Start-VS{
+function Invoke-VS{
 	param ($path)
 	$found = 0
 	
@@ -57,11 +57,11 @@ function Start-VS{
 	}
 }
 
-function StartVisualStudio2010{
+function Invoke-VisualStudio2010{
 	$locationVS = "\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe"
 	$found = 0
 
-	$VSLocation = FindApplicationInProgramFiles($locationVS)
+	$VSLocation = Get-ApplicationInProgramFiles($locationVS)
 	
 	if($VSLocation -ne $null){
 		& $VSLocation
@@ -71,11 +71,11 @@ function StartVisualStudio2010{
 	return $found
 }
 
-function StartVisualStudio2012{
+function Invoke-VisualStudio2012{
 	$locationVS = "\Microsoft Visual Studio 11.0\Common7\IDE\devenv.exe"
 	$found = 0
 
-	$VSLocation = FindApplicationInProgramFiles($locationVS)
+	$VSLocation = Get-ApplicationInProgramFiles($locationVS)
 	
 	if($VSLocation -ne $null){
 		& $VSLocation
@@ -85,7 +85,7 @@ function StartVisualStudio2012{
 	return $found
 }
 
-function FindApplicationInProgramFiles{
+function Get-ApplicationInProgramFiles{
 	param ($path)
 	if (Test-Path "C:\Program Files (x86)$path"){
 		return "C:\Program Files (x86)$path"
@@ -96,7 +96,7 @@ function FindApplicationInProgramFiles{
 	}	
 }	
 
-function Start-Help{
+function Get-CustomHelp{
 	Write-Host "*************************************************************"
 	Write-Host "Start-Solution : Start any solution for the folder you are in"
 	Write-Host "Start-VS : Starts Visual Studio"
@@ -104,7 +104,7 @@ function Start-Help{
 	
 }
 
-function Color-Help{
+function Get-ColorHelp{
 Write-Host ""
 Write-Host "ForeGround Colors:"
 Write-Host "Black" -Fore Black

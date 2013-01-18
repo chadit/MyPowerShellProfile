@@ -33,3 +33,8 @@ set-alias restart Invoke-Reboot
 if (test-path alias:\sleep) { remove-item alias:\sleep -force }
 set-alias sleep Invoke-Hibernate -force
 set-alias lock invoke-terminalLock
+
+Set-Alias home Set-HomeLocation
+
+Set-Alias tbase-work get-tbasegitallworkrepo
+Set-Alias tbase-work-pdebug get-tbasegitallworkrepodebug

@@ -1,4 +1,4 @@
-function tfclone(){
+function Set-tfclone(){
 	param ($repoPath)
 
 }
@@ -6,15 +6,15 @@ function tfclone(){
 # All TF wWrkspaces commands go off the assumption that a path has been updated to map to it
 # C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE  -- tf.exe resides here
 
-function tfWorkspaces-help(){
+function Get-tfWorkspacesHelp(){
 	tf workspaces /?
 }
 
-function get-tfWorkspaces(){
+function Get-tfWorkspaces(){
 	tf workspaces
 }
 
-function set-tfWorkspacesComputerName([string]$oldComputerName, [string]$collectionName , [string]$loginName){
+function Set-tfWorkspacesComputerName([string]$oldComputerName, [string]$collectionName , [string]$loginName){
 	if($oldComputerName -eq $null -or $oldComputerName -eq ''){
 		$oldComputerName = Read-Host "Please enter old computer name"
 	}

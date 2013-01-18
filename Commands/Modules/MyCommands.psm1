@@ -1,15 +1,10 @@
-function ShutDownRemote{
-	param ($ComputerName)
-	Stop-Computer -ComputerName $ComputerName -Force
-}
-
 # function TFS-Checkin{
 	# Neo-NeoRootTFS
 	# tf get /recursive
 	# tf checkin
 # }
 
-function Scan-IpAddress{
+function Find-IpAddress{
 	param([string] $startAddress = "172.20.204.103", $count=254)
 
 	$lastDot = $startAddress.LastIndexOf(".")
@@ -112,3 +107,4 @@ function Scan-IpAddress{
 
 # Get-Job | Receive-Job
 # }
+

@@ -1,4 +1,4 @@
-﻿function Clean-VsSln {    
+﻿function GET-CleanVsSln {    
 	param ([string]$path)
 	write-host "Cleaning bin from: $path"
 	get-childitem $path -include bin, *.tmp, _UpgradeReport_Files -recurse | remove-item -Force -Recurse

@@ -1,4 +1,4 @@
-function check-path{
+function Set-path{
 	$path = $env:path
 	$pathcheck = $path.split(";")
 	$count = 0
