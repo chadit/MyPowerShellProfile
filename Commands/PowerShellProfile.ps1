@@ -49,69 +49,63 @@ function Set-TitleBar{
 }
 
 function Set-HomeLocation{
-	#write-host "Home directory: $homedir"
 	Set-Location $homedir
 }
 
-#function Import-PowerShellCommunityExtensions(){
-	$scripts = resolve-path "$homedir\MyPowerShellProfile\"
-	$pscxUserPreference = "$scripts\modules\Pscx\"
 
-	# Modules are stored here
-	$env:PSModulePath = join-path $scripts modules
+$scripts = resolve-path "$homedir\MyPowerShellProfile\"
+$pscxUserPreference = "$scripts\modules\Pscx\"
 
-	# Load in support modules
-	write-Host "Loading Pscx Extensions"
-	Import-Module "Pscx" -Arg (join-path $pscxUserPreference Pscx.UserPreferences.ps1)
-	write-host "PowerShell Community Extensions $($Pscx:Version) is Loaded" -foregroundcolor yellow 
-#}
+# Modules are stored here
+$env:PSModulePath = join-path $scripts modules
 
-#function Import-PoshGitProfile{
-	$poshgitProfile = "$homedir\MyPowerShellProfile\modules\posh-git\profile.example.ps1"
-	#write-host $poshgitProfile
-	if (Test-Path $poshgitProfile)
-	{		
-		write-host "Loading Posh-git" -foregroundcolor Cyan 
-		Import-Module $poshgitProfile 	
-	}
-	else
-	{
-		write-host "could not find Posh-git folder"
-	}
-#}
+# Load in support modules
+write-Host "Loading Pscx Extensions"
+Import-Module "Pscx" -Arg (join-path $pscxUserPreference Pscx.UserPreferences.ps1)
+write-host "PowerShell Community Extensions $($Pscx:Version) is Loaded" -foregroundcolor yellow 
 
-#function Import-PoshHGProfile{
-	$poshhgProfile = "$homedir\MyPowerShellProfile\modules\posh-hg\profile.example.ps1"
-	if (Test-Path $poshhgProfile)
-	{
-		 write-host "Loading Posh-hg and Locations" -foregroundcolor Gray 
-		 Import-Module $poshhgProfile 	
-	 }
-	 else
-	 {
-		 write-host "could not find Posh-hg folder"
-	 }
-#}
+$poshgitProfile = "$homedir\MyPowerShellProfile\modules\posh-git\profile.example.ps1"
+if (Test-Path $poshgitProfile)
+{		
+	write-host "Loading Posh-git" -foregroundcolor Cyan 
+	Import-Module $poshgitProfile 	
+}
+else
+{
+	write-host "could not find Posh-git folder"
+}
 
-#function Import-CustomCommands{
-	$commandsFolder = "$homedir\MyPowerShellProfile\Commands\Modules"
-	if (Test-Path $commandsFolder)
-	{	
-		Import-Module $commandsFolder\CleanUpDocuments
-		Import-Module $commandsFolder\MyCommands
-		Import-Module $commandsFolder\MyCommandsGit
-		Import-Module $commandsFolder\MyCommandsTfs
-		Import-Module $commandsFolder\path
-		Import-Module $commandsFolder\setLocations
-		Import-Module $commandsFolder\startApplication
-	}
-	else
-	{
-		write-host "could not find command folder"
-	}
-#}
+$poshhgProfile = "$homedir\MyPowerShellProfile\modules\posh-hg\profile.example.ps1"
+if (Test-Path $poshhgProfile)
+{
+	write-host "Loading Posh-hg and Locations" -foregroundcolor Gray 
+	Import-Module $poshhgProfile 	
+}
+else
+{
+	write-host "could not find Posh-hg folder"
+}
 
-#function Import-SQLPowerShellExtension{
+$commandsFolder = "$homedir\MyPowerShellProfile\Commands\Modules"
+if (Test-Path $commandsFolder)
+{	
+	Import-Module $commandsFolder\CleanUpDocuments
+	Import-Module $commandsFolder\MyCommands
+	Import-Module $commandsFolder\MyCommandsGit
+	Import-Module $commandsFolder\MyCommandsTfs
+	Import-Module $commandsFolder\path
+	Import-Module $commandsFolder\setLocations
+	Import-Module $commandsFolder\startApplication
+	Import-Module $commandsFolder\ChocolateyInstalls
+}
+else
+{
+	write-host "could not find command folder"
+}
+
+$isSqlServerInstalled = GetForSqlServer
+
+if($isSqlServerInstalled -eq $true){
 	$sqlpsxFolder = "$homedir\MyPowerShellProfile\modules\sqlpsx"
 	if(Test-Path $sqlpsxFolder){
 		write-host "Loading SQLpx " -foregroundcolor Gray 
@@ -134,26 +128,17 @@ function Set-HomeLocation{
 		# Import-Module "$sqlpsxFolder\SSIS\SSIS.psm1"
 		# Import-Module "$sqlpsxFolder\WPK\WPK.psm1"
 	}
-#}
+}
 
 
 #Set the windows title
 Set-TitleBar
 Set-HomeLocation
 
-#Load modules
-#Import-PowerShellCommunityExtensions 
-#Import-PoshGitProfile
-#Import-PoshHGProfile
-#Import-CustomCommands
-#Import-SQLPowerShellExtension
 
 
-#Push-Location (Split-Path -Path $MyInvocation.MyCommand.Definition -Parent)
-#Pop-Location
-
-#$isSqlServerInstalled = "C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn"
 
 Import-Module $homedir\MyPowerShellProfile\Commands\setAlias.ps1
+Import-Module $homedir\MyPowerShellProfile\Commands\Test-Port.ps1
 
 #cls

@@ -1,9 +1,3 @@
-# function TFS-Checkin{
-	# Neo-NeoRootTFS
-	# tf get /recursive
-	# tf checkin
-# }
-
 function Find-IpAddress{
 	param([string] $startAddress = "172.20.204.103", $count=254)
 
@@ -23,6 +17,36 @@ function Find-IpAddress{
 		}
 		$ip++
 	} until ($ip -eq $count)
+}
+
+function GetForSqlServer{
+	$sqlInstalled = $false
+	$sqlInstalled = Test-Path("C:\Program Files (x86)\Microsoft SQL Server\90\Tools\Binn")
+	$sqlInstalled = Test-Path("C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn")
+	$sqlInstalled = Test-Path("C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn")
+
+	return $sqlInstalled
+}
+
+function CopyFiles{
+$arSourceFolders = ("D:\MySourcePath1", "D:\MySourcePath2");
+$arDestinationFolders = ("F:\MyDestinationPath1", "F:\MyDestinationPath2");
+
+if($arSourceFolders.Length -ne $arDestinationFolders.Length)
+{
+    Write-host -foregroundcolor 'red' "The numbers of folders have to similar";
+}
+else{
+    for($i=0; $i -lt $arSourceFolders.Length; $i++)
+    {
+        Write-host -foregroundcolor 'green' "Process " $arSourceFolders[$i] " -> " $arDestinationFolders[$i] ;
+        robocopy $arSourceFolders[$i] $arDestinationFolders[$i] /COPYALL /E /R:0 /xo
+    }
+}
+
+Write-host -foregroundcolor 'green' "Done :)";
+
+
 }
 
 # function Set-WallpaperRemote{

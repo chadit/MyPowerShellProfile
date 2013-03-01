@@ -73,6 +73,6 @@ function Set-SkyDrive{
 }
 
 function Set-Source{
-	$location = "\projects\Source"
+	$location = "$dropbox\Source"
 	Set-LocationFromPath($location)
 }

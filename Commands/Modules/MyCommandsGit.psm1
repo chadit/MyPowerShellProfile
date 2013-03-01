@@ -5,12 +5,13 @@ function get-tbasegitallworkrepodebug{
 
 function get-tbasegitallworkrepo{
 param ([string]$debug)
-	if($debug -ne ""){
-		$isDebugMode = $debug
+
+	if($debug -eq ""){
+		$isDebugMode = "false"
 	}else{
 		$isDebugMode = "true"
 	}
-	
+
 	cls #clear console
 	
 	if($isDebugMode -eq "true"){
@@ -48,8 +49,6 @@ function invoke-gitCheckForUpdate{
 	}
 }
 
-
-
 function set-gitBranchSwitch{
 	$startBranch = git rev-parse --abbrev-ref HEAD
 	$startBranch = format-parseOutStar $startBranch
@@ -70,8 +69,7 @@ function set-gitBranchSwitch{
 	
 	if($startBranch -ne "master"){			
 		set-RevertBackToStartingBranch $startBranch
-	}
-	
+	}	
 }
 
 function get-pullLatestChanges{
@@ -82,7 +80,11 @@ function get-pullLatestChanges{
 		if($pullTest -match "up to date"){	
 			write-host $pullTest -Fore DarkGreen
 		}else{
-			write-host "changes where applied" -Fore DarkGreen
+			if($isDebugMode -eq "true"){
+				write-host $pullTest -Fore White
+			}else{
+				write-host "changes where applied" -Fore DarkGreen
+			}
 		}
 		
 		# Only do a merge with other branches if no errors occur on master
@@ -148,11 +150,50 @@ function Set-BranchMerge{
 	}
 }
 
+function Set-GitCheckin{
+	$checkinType = "A"
+	$checkinType = Read-Host "type of checkin (R)esolve, (A)ssociate[default], or (N)one"
+	
+	
+	
 
-#Set-Item –Path Function:invoke-gitCheckForUpdate –Options Private
-#Set-Item –Path Function:set-gitBranchSwitch –Options Private
-#Set-Item –Path Function:get-pullLatestChanges –Options Private
-#Set-Item –Path Function:format-parseOutStar –Options Private
-#Set-Item –Path Function:set-RevertBackToStartingBranch –Options Private
-#Set-Item –Path Function:Find-CheckForOtherBranches –Options Private
-#Set-Item –Path Function:Set-BranchMerge –Options Private
+
+
+#
+#or the information, you could associate and resolve workitems with the command line options :
+#--resolve=<workitem id>
+#ID of the TFS work item to resolve during check-in
+#--associate=<workitem id>
+#ID of the TFS work item to associate during check-in
+#
+}
+
+function whichGitBridge{
+	$isGit = isSourceInGit(Get-Location)
+
+	$currentLocationGitFolder = Get-Location + "\.git\"
+	$isGit = $false
+	if(Test-Path $currentLocationGitFolder){
+		$isGit = $true	
+	}
+	
+	if($isGit -eq $true){
+	
+	
+	
+	$whichGitBridge = $false
+	}
+	
+
+
+}
+
+function isSourceInGit{
+	param ($path)
+	#$isGit = $false
+	$currentFolder = $path + "\.git\"
+	if(Test-Path $currentFolder){
+		return $true	
+	}
+	return $false
+}
