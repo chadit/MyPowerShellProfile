@@ -12,10 +12,10 @@ $size = $Shell.WindowSize
 $size.width=140
 $size.height=40
 $Shell.WindowSize = $size
-
+cls
 #Get if OS is 32 or 64 bit
 $os=Get-WMIObject win32_operatingsystem
-
+write-host "Windows PowerShell`nCopyright (c) 2012 Microsoft Corporation. All rights reserved.`n" -foregroundcolor white
 #cls
 #Set the default version of Visual Studio to use
 $global:DefaultVisualStudio = "2012"

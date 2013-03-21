@@ -80,11 +80,11 @@ function get-pullLatestChanges{
 		if($pullTest -match "up to date"){	
 			write-host $pullTest -Fore DarkGreen
 		}else{
-			if($isDebugMode -eq "true"){
+			#if($isDebugMode -eq "true"){
 				write-host $pullTest -Fore White
-			}else{
-				write-host "changes where applied" -Fore DarkGreen
-			}
+			#}#else{
+			#	write-host "changes where applied" -Fore DarkGreen
+			#}
 		}
 		
 		# Only do a merge with other branches if no errors occur on master

@@ -29,8 +29,8 @@ function GetForSqlServer{
 }
 
 function CopyFiles{
-$arSourceFolders = ("D:\MySourcePath1", "D:\MySourcePath2");
-$arDestinationFolders = ("F:\MyDestinationPath1", "F:\MyDestinationPath2");
+$arSourceFolders = ("C:\Users\cengland\Downloads");
+$arDestinationFolders = ("D:\Users\cengland\downloads");
 
 if($arSourceFolders.Length -ne $arDestinationFolders.Length)
 {
@@ -45,8 +45,26 @@ else{
 }
 
 Write-host -foregroundcolor 'green' "Done :)";
+}
+
+function MoveFiles{
+$arSourceFolders = ("C:\Users\cengland\Downloads");
+$arDestinationFolders = ("D:\Users\cengland\downloads");
+
+        Write-host -foregroundcolor 'green' "Process " $arSourceFolders " -> " $arDestinationFolders ;
+        robocopy $arSourceFolders $arDestinationFolders /Z /S /MOVE
+    
+Write-host -foregroundcolor 'green' "Done :)";
+}
+
+function MoveFilesOlderThan{
+$arSourceFolders = ("D:\Users\cengland\test\downloads");
+$arDestinationFolders = ("D:\Users\cengland\test\downloadsold");
+
+Get-ChildItem -Recurse $arSourceFolders | where {$_.Creationtime -lt (Get-Date).AddDays(-16)} | ForEach-Object { robocopy $arSourceFolders $arDestinationFolders /Z /S /Move }
 
 
+Write-host -foregroundcolor 'green' "Done :)";
 }
 
 # function Set-WallpaperRemote{
