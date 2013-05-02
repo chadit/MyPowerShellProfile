@@ -49,7 +49,14 @@ function Set-TitleBar{
 }
 
 function Set-HomeLocation{
-	Set-Location $homedir
+	$whichdir = Get-Location
+	$whichdir = $whichdir.ToString().ToLower().Trim()
+	$sys32 = "c:\windows\system32"
+	$doc = "c:\users\$env:username\documents"
+	
+	if(($whichdir -eq $sys32) -or ($whichdir -eq $doc)){
+		Set-Location $homedir
+	}
 }
 
 
@@ -73,6 +80,17 @@ if (Test-Path $poshgitProfile)
 else
 {
 	write-host "could not find Posh-git folder"
+}
+
+$poshtfProfile = "$homedir\MyPowerShellProfile\modules\posh-tf\profile.example.ps1"
+if (Test-Path $poshgitProfile)
+{		
+	write-host "Loading Posh-tf" -foregroundcolor Cyan 
+	Import-Module $poshgitProfile 	
+}
+else
+{
+	write-host "could not find Posh-tf folder"
 }
 
 $poshhgProfile = "$homedir\MyPowerShellProfile\modules\posh-hg\profile.example.ps1"
