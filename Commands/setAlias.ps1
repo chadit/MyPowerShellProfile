@@ -1,12 +1,6 @@
 #Set Alias
-Set-Alias Neo-APvX Set-APvX # APVX Main App
-Set-Alias Neo-APvXService Set-APvX_Service # APVX Web Services
-Set-Alias Neo-APvXShare Set-APvX_Shared # APVX Share Library
-Set-Alias Neo-APvX_Db Set-APvX_Db # APVX database
-Set-Alias Neo-BarcodeServices Set-BarcodeServices # APVX Label app services
-Set-Alias Neo-NeoLabels Set-NeoLabels # APVX label main app
-Set-Alias Neo-NeoLabelsCommon Set-NeoLabelsCommon # APVX label share library
-Set-Alias Neo-DocumentMgmt Set-NeoDocumentManagement # Document Locator
+Set-Alias CM_Service Set-CM_Service # Service Framework
+Set-Alias CM_API Set-CM_API # Service Framework
 
 Set-Alias ChlodnyWebApi Set-ChlodnyWebApi
 Set-Alias Dropbox Set-Dropbox

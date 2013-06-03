@@ -59,17 +59,23 @@ function Set-HomeLocation{
 	}
 }
 
-
-$scripts = resolve-path "$homedir\MyPowerShellProfile\"
-$pscxUserPreference = "$scripts\modules\Pscx\"
+# Only loading PSCX if PowerShell 3 or higher, later on might add packward support for 2
+if($Host.Version.Major > 2){
+	$scripts = resolve-path "$homedir\MyPowerShellProfile\"
+	$pscxUserPreference = "$scripts\modules\Pscx\3\"	
+}else{
+	$scripts = resolve-path "$homedir\MyPowerShellProfile\"
+	$pscxUserPreference = "$scripts\modules\Pscx\2.1.1\"
+}
 
 # Modules are stored here
 $env:PSModulePath = join-path $scripts modules
 
 # Load in support modules
-write-Host "Loading Pscx Extensions"
-Import-Module "Pscx" -Arg (join-path $pscxUserPreference Pscx.UserPreferences.ps1)
-write-host "PowerShell Community Extensions $($Pscx:Version) is Loaded" -foregroundcolor yellow 
+#write-Host "Loading Pscx Extensions"
+
+#Import-Module "Pscx" -Arg (join-path $pscxUserPreference Pscx.UserPreferences.ps1)
+#write-host "PowerShell Community Extensions $($Pscx:Version) is Loaded" -foregroundcolor yellow 
 
 $poshgitProfile = "$homedir\MyPowerShellProfile\modules\posh-git\profile.example.ps1"
 if (Test-Path $poshgitProfile)

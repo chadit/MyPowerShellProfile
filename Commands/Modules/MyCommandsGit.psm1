@@ -20,7 +20,7 @@ param ([string]$debug)
 	
 	$currentLocation = Get-Location
 	Write-Host "************************************************************ `n `tRefreshing all work Git-tfs repos `n************************************************************"
-	$gitArrayWork = ("neo-apvx","neo-apvxservice","neo-apvxshare","neo-apvx_db","neo-barcodeservices","neo-neolabels","neo-neolabelscommon", "Neo-DocumentMgmt")
+	$gitArrayWork = ("CallMiner_Service")
 
 	if($isDebugMode -eq "true"){
 		Write-DebugMessage "Repository array collection is `n"$gitAttayWork

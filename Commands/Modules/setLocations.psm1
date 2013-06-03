@@ -2,53 +2,13 @@
 #See bottom if you want to add an alias to the list
 
 # work related locations
-function Set-APvX{
-	$location = "\Projects\Work\NeoGen\APvXDev\APvX"
+function Set-CM_Service{
+	$location = "\Projects\TFS\ServiceFramework\trunk"
 	Set-LocationFromPath ($location)
 }
 
-function Set-APvX_Service{
-	$location = "\Projects\Work\NeoGen\APvXDev\APvX_ServiceLayer"
-	Set-LocationFromPath ($location)
-}
-
-function Set-APvX_Shared{
-	$location = "\Projects\Work\NeoGen\APvXDev\APvX_Shared"
-	Set-LocationFromPath ($location)
-}
-
-function Set-APvX_Db{
-	$location = "\Projects\Work\NeoGen\APvXDev\APvX_DB"
-	Set-LocationFromPath ($location)
-}
-
-function Set-BarcodeServices{
-	$location = "\Projects\Work\NeoGen\NeoBarCodesDev\BarcodeServices"
-	Set-LocationFromPath ($location)
-}
-
-function Set-NeoLabels{
-	$location = "\Projects\Work\NeoGen\NeoBarCodesDev\NeoLabels"
-	Set-LocationFromPath ($location)
-}
-
-function Set-NeoLabelsCommon{
-	$location = "\Projects\Work\NeoGen\NeoBarCodesDev\LabelsCommon"
-	Set-LocationFromPath ($location)
-}
-
-function Set-NeoDocumentManagement{
-	$location = "\Projects\Work\NeoGen\DocumentManagment"
-	Set-LocationFromPath ($location)
-}
-
-function Set-TfsNeoProject{
-	$location = "\Projects\Work\NeoGenomics"
-	Set-LocationFromPath($location)
-}
-
-function Set-NeoTfsBarcodeRoot {
-	$location = "\Projects\Work\NeoGenomics\Neo Barcodes"
+function Set-CM_API{
+	$location = "\Projects\TFS\CallMinerAPI\trunk"
 	Set-LocationFromPath($location)
 }
 
