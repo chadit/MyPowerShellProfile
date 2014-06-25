@@ -20,7 +20,7 @@ param ([string]$debug)
 	
 	$currentLocation = Get-Location
 	Write-Host "************************************************************ `n `tRefreshing all work Git-tfs repos `n************************************************************"
-	$gitArrayWork = ("CallMiner_Service")
+	$gitArrayWork = ("CM_Service", "CM_API")
 
 	if($isDebugMode -eq "true"){
 		Write-DebugMessage "Repository array collection is `n"$gitAttayWork

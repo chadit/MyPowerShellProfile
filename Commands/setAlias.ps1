@@ -1,6 +1,8 @@
 #Set Alias
 Set-Alias CM_Service Set-CM_Service # Service Framework
 Set-Alias CM_API Set-CM_API # Service Framework
+Set-Alias CM_Home Set-CM_Home 
+Set-Alias Work Set-WorkProject #Work Get folder
 
 Set-Alias ChlodnyWebApi Set-ChlodnyWebApi
 Set-Alias Dropbox Set-Dropbox
@@ -29,6 +31,7 @@ set-alias sleep Invoke-Hibernate -force
 set-alias lock invoke-terminalLock
 
 Set-Alias home Set-HomeLocation
+
 
 Set-Alias tbase-work get-tbasegitallworkrepo
 Set-Alias tbase-work-pdebug get-tbasegitallworkrepodebug

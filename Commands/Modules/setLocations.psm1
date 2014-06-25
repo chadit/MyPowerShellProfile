@@ -3,12 +3,17 @@
 
 # work related locations
 function Set-CM_Service{
-	$location = "\Projects\TFS\ServiceFramework\trunk"
+	$location = "\Projects\CallMiner\git\ServiceFramework"
+	Set-LocationFromPath ($location)
+}
+
+function Set-WorkProject{
+	$location = "\Projects\CallMiner\git"
 	Set-LocationFromPath ($location)
 }
 
 function Set-CM_API{
-	$location = "\Projects\TFS\CallMinerAPI\trunk"
+	$location = "\Projects\CallMiner\git\CallMinerApi"
 	Set-LocationFromPath($location)
 }
 
@@ -24,7 +29,7 @@ function Set-PowerShellProject{
 }
 
 function Set-Dropbox{
-	$location = "\Users\$env:username\Dropbox"
+	$location = "\Cloud\Dropbox"
 	Set-LocationFromPath ($location)
 }
 function Set-SkyDrive{

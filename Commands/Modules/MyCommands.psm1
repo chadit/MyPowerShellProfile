@@ -28,34 +28,7 @@ function GetForSqlServer{
 	return $sqlInstalled
 }
 
-function CopyFiles{
-$arSourceFolders = ("C:\Users\cengland\Downloads");
-$arDestinationFolders = ("D:\Users\cengland\downloads");
 
-if($arSourceFolders.Length -ne $arDestinationFolders.Length)
-{
-    Write-host -foregroundcolor 'red' "The numbers of folders have to similar";
-}
-else{
-    for($i=0; $i -lt $arSourceFolders.Length; $i++)
-    {
-        Write-host -foregroundcolor 'green' "Process " $arSourceFolders[$i] " -> " $arDestinationFolders[$i] ;
-        robocopy $arSourceFolders[$i] $arDestinationFolders[$i] /COPYALL /E /R:0 /xo
-    }
-}
-
-Write-host -foregroundcolor 'green' "Done :)";
-}
-
-function MoveFiles{
-$arSourceFolders = ("C:\Users\cengland\Downloads");
-$arDestinationFolders = ("D:\Users\cengland\downloads");
-
-        Write-host -foregroundcolor 'green' "Process " $arSourceFolders " -> " $arDestinationFolders ;
-        robocopy $arSourceFolders $arDestinationFolders /Z /S /MOVE
-    
-Write-host -foregroundcolor 'green' "Done :)";
-}
 
 function MoveFilesOlderThan{
 $arSourceFolders = ("D:\Users\cengland\test\downloads");

@@ -13,6 +13,7 @@ $size.width=140
 $size.height=40
 $Shell.WindowSize = $size
 cls
+
 #Get if OS is 32 or 64 bit
 $os=Get-WMIObject win32_operatingsystem
 write-host "Windows PowerShell`nCopyright (c) 2012 Microsoft Corporation. All rights reserved.`n" -foregroundcolor white
@@ -99,6 +100,14 @@ else
 	write-host "could not find Posh-tf folder"
 }
 
+write-host "Loading TFS PowerTool PowerShell Snapin" -foregroundcolor Cyan
+if ( (Get-PSSnapin -Name Microsoft.TeamFoundation.PowerShell -ErrorAction SilentlyContinue) -eq $null )
+{
+    Add-PsSnapin Microsoft.TeamFoundation.PowerShell
+}
+
+
+
 $poshhgProfile = "$homedir\MyPowerShellProfile\modules\posh-hg\profile.example.ps1"
 if (Test-Path $poshhgProfile)
 {
@@ -121,6 +130,8 @@ if (Test-Path $commandsFolder)
 	Import-Module $commandsFolder\setLocations
 	Import-Module $commandsFolder\startApplication
 	Import-Module $commandsFolder\ChocolateyInstalls
+	#Import-Module "$homedir\MyPowerShellProfile\Commands\Modules\MongoCommands.ps1"
+	Import-Module "$homedir\MyPowerShellProfile\Commands\Modules\Backup.psm1"
 }
 else
 {

@@ -7,3 +7,4 @@
 	write-host "cleaning up Temp Test folders from $path"
 	get-childitem $path -include TestResults -recurse | remove-item -Force -Recurse
 }
+

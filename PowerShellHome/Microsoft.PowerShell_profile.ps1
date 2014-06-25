@@ -8,6 +8,17 @@ elseif(Test-Path "D:$profileLocation")
 {
 	. "D:$profileLocation"
 }
+else
+{
+	$profileLocation = "\Cloud\Dropbox\Documents\WindowsPowerShell\MyPowerShellProfile\Commands\PowerShellProfile.ps1"
+	if (Test-Path "C:$profileLocation"){
+		. "C:$profileLocation"
+	}
+	elseif(Test-Path "D:$profileLocation")
+	{
+		. "D:$profileLocation"
+	}
+}
 # SIG # Begin signature block
 # MIIEMwYJKoZIhvcNAQcCoIIEJDCCBCACAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
@@ -33,3 +44,6 @@ elseif(Test-Path "D:$profileLocation")
 # 3hGBCaHaCD/dyvCIHz0mIG3wTbIunrRtY7zaKgHyJ2b2hhp17Jx61qMMfUFMk7E0
 # jU2hFgFh2hPRnv9vvXafkNhWsEgAfoo=
 # SIG # End signature block
+
+
+
