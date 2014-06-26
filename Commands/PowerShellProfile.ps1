@@ -19,7 +19,7 @@ $os=Get-WMIObject win32_operatingsystem
 write-host "Windows PowerShell`nCopyright (c) 2012 Microsoft Corporation. All rights reserved.`n" -foregroundcolor white
 #cls
 #Set the default version of Visual Studio to use
-$global:DefaultVisualStudio = "2012"
+$global:DefaultVisualStudio = "2013"
 write-host "Default Visual Studio is $DefaultVisualStudio" -foregroundcolor yellow 
 
 #setup the location of the users my document folder
@@ -100,11 +100,11 @@ else
 	write-host "could not find Posh-tf folder"
 }
 
-write-host "Loading TFS PowerTool PowerShell Snapin" -foregroundcolor Cyan
-if ( (Get-PSSnapin -Name Microsoft.TeamFoundation.PowerShell -ErrorAction SilentlyContinue) -eq $null )
-{
-    Add-PsSnapin Microsoft.TeamFoundation.PowerShell
-}
+#write-host "Loading TFS PowerTool PowerShell Snapin" -foregroundcolor Cyan
+#if ( (Get-PSSnapin -Name Microsoft.TeamFoundation.PowerShell -ErrorAction SilentlyContinue) -eq $null )
+#{
+#    Add-PsSnapin Microsoft.TeamFoundation.PowerShell
+#}
 
 
 
