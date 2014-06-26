@@ -53,7 +53,14 @@ function Set-HomeLocation{
 	$whichdir = Get-Location
 	$whichdir = $whichdir.ToString().ToLower().Trim()
 	$sys32 = "c:\windows\system32"
-	$doc = "c:\users\$env:username\documents"
+
+	if(Test-Path "D:\Cloud\Dropbox\Documents"){
+		$doc = "D:\Cloud\Dropbox\Documents"
+	}else{
+		$doc = "c:\users\$env:username\documents"
+	}
+
+	
 	
 	if(($whichdir -eq $sys32) -or ($whichdir -eq $doc)){
 		Set-Location $homedir
@@ -89,16 +96,27 @@ else
 	write-host "could not find Posh-git folder"
 }
 
-$poshtfProfile = "$homedir\MyPowerShellProfile\modules\posh-tf\profile.example.ps1"
-if (Test-Path $poshgitProfile)
+$poshnpmProfile = "$homedir\MyPowerShellProfile\modules\posh-npm\profile.example.ps1"
+if (Test-Path $poshnpmProfile)
 {		
-	write-host "Loading Posh-tf" -foregroundcolor Cyan 
-	Import-Module $poshgitProfile 	
+	write-host "Loading Posh-npm" -foregroundcolor Cyan 
+	Import-Module $poshnpmProfile 	
 }
 else
 {
-	write-host "could not find Posh-tf folder"
+	write-host "could not find Posh-npm folder"
 }
+
+#$poshtfProfile = "$homedir\MyPowerShellProfile\modules\posh-tf\profile.example.ps1"
+#if (Test-Path $poshgitProfile)
+#{		
+#	write-host "Loading Posh-tf" -foregroundcolor Cyan 
+#	Import-Module $poshgitProfile 	
+#}
+#else
+#{
+#	write-host "could not find Posh-tf folder"
+#}
 
 #write-host "Loading TFS PowerTool PowerShell Snapin" -foregroundcolor Cyan
 #if ( (Get-PSSnapin -Name Microsoft.TeamFoundation.PowerShell -ErrorAction SilentlyContinue) -eq $null )
@@ -175,5 +193,6 @@ Set-HomeLocation
 
 Import-Module $homedir\MyPowerShellProfile\Commands\setAlias.ps1
 Import-Module $homedir\MyPowerShellProfile\Commands\Test-Port.ps1
+Import-Module $homedir\MyPowerShellProfile\Commands\Modules\npmnodes.ps1
 
 #cls
