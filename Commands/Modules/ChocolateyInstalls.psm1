@@ -1,60 +1,63 @@
 function Invoke-ChocolateyUpgradeCheck{
-	Invoke-Expression "cinst"
+	Invoke-Expression "choco"
+	Invoke-Expression "choco chocolatey"
 }
 
+# write a function that stops ssh agent before this will work
 function Invoke-GitTools{
-	Invoke-Expression "cinst git.install"
-	Invoke-Expression "cinst gitextensions"
-	Invoke-Expression "cinst git-credential-winstore"
-	#Invoke-Expression "cinst poshgit"
-	Invoke-Expression "cinst gittfs"
-	Invoke-Expression "cinst Git-TF"
-	Invoke-Expression "cinst git-flow-dependencies"
-	Invoke-Expression "cinst kdiff3"
-	Invoke-Expression "regsvr32 /u 'C:\Program Files (x86)\Git\git-cheetah\git_shell_ext64.dll'"
+	Invoke-Expression "choco install git"
+	#Invoke-Expression "choco git.install"
+	Invoke-Expression "choco install gitextensions"
+	Invoke-Expression "choco install git-credential-winstore"
+	Invoke-Expression "choco install poshgit"
+	Invoke-Expression "choco install gittfs"
+	Invoke-Expression "choco install Git-TF"
+	Invoke-Expression "choco install git-flow-dependencies"
+	Invoke-Expression "choco install kdiff3"
+	#Invoke-Expression "regsvr32 /u 'C:\Program Files (x86)\Git\git-cheetah\git_shell_ext64.dll'"
 }
 
 function Invoke-TFSTools{
-	Invoke-Expression "cinst tfpt"
+	Invoke-Expression "choco install tfs2013powertools"
 }
 
 function Invoke-RubyTools{
-	Invoke-Expression "cinst ruby"
-	Invoke-Expression "cinst ruby.devkit"
+	Invoke-Expression "choco install ruby"
+	Invoke-Expression "choco install ruby.devkit"
 }
 
 function Invoke-NodeTools{
-	Invoke-Expression "cinst nodejs.install"
+	Invoke-Expression "choco install nodejs"
 }
 
 function Invoke-MongodbTools{
-	Invoke-Expression "cinst mongodb"
-	Invoke-Expression "cinst MongoVUE"
+	Invoke-Expression "choco install mongodb"
+	Invoke-Expression "choco install MongoVUE"
 }
 
 function Invoke-GeneralTools{
-	Invoke-Expression "cinst notepadplusplus.install"
-	Invoke-Expression "cinst 7zip.install"
-	Invoke-Expression "cinst vlc"
-	Invoke-Expression "cinst paint.net"
-	Invoke-Expression "cinst ChocolateyGUI"
+	Invoke-Expression "choco install notepadplusplus.install"
+	Invoke-Expression "choco install 7zip.install"
+	Invoke-Expression "choco install vlc"
+	Invoke-Expression "choco install paint.net"
+	#Invoke-Expression "choco install ChocolateyGUI"
 }
 
 function Invoke-DevelopmentTools{
-	Invoke-Expression "cinst fiddler"
-	Invoke-Expression "cinst wixtoolset"
+	Invoke-Expression "choco install fiddler"
+	Invoke-Expression "choco install wixtoolset"
 }
 
 function Invoke-Browsers{
-	Invoke-Expression "cinst GoogleChrome"
-	Invoke-Expression "cinst Firefox"
+	Invoke-Expression "choco install GoogleChrome"
+	Invoke-Expression "choco install Firefox"
 }
 
 function Invoke-Perl{
-	Invoke-Expression "cinst StrawberryPerl"
+	Invoke-Expression "choco install StrawberryPerl"
 }
 
 function Invoke-PowerShell{
-	Invoke-Expression "cinst pscx"
-	Invoke-Expression "cinst PowerGUI"
+	Invoke-Expression "choco install pscx"
+	Invoke-Expression "choco install PowerGUI"
 }

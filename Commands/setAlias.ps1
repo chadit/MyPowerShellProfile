@@ -2,6 +2,7 @@
 Set-Alias CM_Service Set-CM_Service # Service Framework
 Set-Alias CM_API Set-CM_API # Service Framework
 Set-Alias CM_Home Set-CM_Home 
+Set-Alias CM_SantaCruz Set-CM_SantaCruz
 Set-Alias Work Set-WorkProject #Work Get folder
 
 Set-Alias ChlodnyWebApi Set-ChlodnyWebApi

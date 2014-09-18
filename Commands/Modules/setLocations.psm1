@@ -2,8 +2,18 @@
 #See bottom if you want to add an alias to the list
 
 # work related locations
+function Set-CM_Home{
+	$location = "\Projects\CallMiner\git"
+	Set-LocationFromPath ($location)
+}
+
 function Set-CM_Service{
 	$location = "\Projects\CallMiner\git\ServiceFramework"
+	Set-LocationFromPath ($location)
+}
+
+function Set-CM_SantaCruz{
+	$location = "\Projects\CallMiner\git\SantaCruz"
 	Set-LocationFromPath ($location)
 }
 
