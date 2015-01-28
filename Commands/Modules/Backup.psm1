@@ -14,6 +14,22 @@ function MirrorDrive{
 	robocopy $source $destination /mir /r:3 /xd $exclude /xd $exclude2
 }
 
+function MirrorWork{
+	param([string] $source = "D:\Projects", [string]$destination = "F:\shares\Projects\WorkDesktop")
+	#$source += "\"
+	#$destination += "\"
+
+	$exclude = $destination + "System Volume Information"
+	$exclude2 = $destination + "$" + "RECYCLE.BIN"
+
+	# $RECYCLE.BIN
+
+	write-host "copying files from $source to $destination excluding $exclude, $exclude2"
+
+ 	#/r:0 sets the retry count
+	robocopy $source $destination /mir /r:3 /xd $exclude /xd $exclude2
+}
+
 function BackupPicturesToExternalDriveWork{
 	param([string] $source = "C:\Users\chad.england\SkyDrive\Pictures", [string]$destination = "F:\shares\Photos")
 	#$source += "\"

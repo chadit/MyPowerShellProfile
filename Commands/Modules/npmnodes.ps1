@@ -1,4 +1,4 @@
-function installAllModules{
+function Invoke-InstallNpmModules{
 cls
 write-host "Updating npm"
 . npm cache clear
