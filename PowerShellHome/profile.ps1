@@ -20,14 +20,17 @@ function Test-LocationFromPath{
 function Set-LocationFromPath{
 	param ($location)
 	Write-Host "Setting Path to $location"  -foregroundcolor Cyan 
-	
-	# test if on C or D drive, can be expanded
-	if (Test-Path "D:$location"){
-		Set-Location "D:$location"
-	}
-	elseif(Test-Path "C:$location")
-	{
-		Set-Location "C:$location"
+	if(Test-Path $location){
+		Set-Location $location
+	}else{
+		# test if on C or D drive, can be expanded
+		if (Test-Path "D:$location"){
+			Set-Location "D:$location"
+		}
+		elseif(Test-Path "C:$location")
+		{
+			Set-Location "C:$location"
+		}
 	}
 }
 
@@ -46,6 +49,33 @@ elseif(Test-LocationFromPath("\Cloud\SkyDrive")){
 	$global:skydrive = Test-LocationFromPath("\Cloud\SkyDrive")
 }
 
+
+function FindSetProjectDirectory{
+	$findHome = "\Projects"
+  
+	if (Test-Path "C:$findHome") {
+	 	write-host "setting project home to $findHome"
+	    $global:projectdir = "C:$findHome"
+	    FindSetCreateDependancyDirectory
+	}else{
+		if (Test-Path "D:$findHome") {
+			write-host "setting home to $findHome"
+			$global:projectdir = "D:$findHome"
+			FindSetCreateDependancyDirectory
+		}else{
+			write-host "project folder not found, setup before the script will continue`n" -foregroundcolor red
+			Break
+		}
+	}
+}
+
+function FindSetCreateDependancyDirectory{
+	if(-not(Test-Path "$projectdir\Dependancies")){
+		write-host "create directory $projectdir\Dependancies"
+		[system.io.directory]::CreateDirectory("$projectdir\Dependancies")
+	}
+	$global:dependancies = "$projectdir\Dependancies"
+}
 
 
 function FindSetHomeDirectory{
@@ -78,6 +108,49 @@ function FindSetHomeDirectory{
 	}
 }
 
+function GetSettings{
+	if(Test-Path "$homedir\settings.json"){
+		$config = (Get-Content $homedir\settings.json) -join "`n" | ConvertFrom-Json
 
+		if($config.Name){
+			$global:profileSettings.Name = $config.Name
+		}
+
+		if($config.Email){
+			$global:profileSettings.Email = $config.Email
+		}
+
+		if($config.LastUpdate){
+			$global:profileSettings.LastUpdate = $config.LastUpdate
+		}
+
+		if($config.LastSync){
+			$global:profileSettings.LastSync = $config.LastSync
+		}
+
+	}else{
+		write-host "settings does not exist, creating"
+		CreateUpdateSettings
+	}
+}
+
+function CreateUpdateSettings{
+	$a = Get-Date
+	$global:profileSettings.LastSync = $a.ToUniversalTime()
+	$global:profileSettings | ConvertTo-Json | Set-Content $homedir\settings.json -Encoding Unicode
+}
+
+$a = Get-Date
+
+$global:profileSettings = @{
+	Name = "";
+	Email = "";
+	LastUpdate = $a.ToUniversalTime().AddDays(-2);
+	LastSync = $a.ToUniversalTime().AddDays(-2);
+}
+
+FindSetProjectDirectory
 FindSetHomeDirectory
+GetSettings
 
+CreateUpdateSettings

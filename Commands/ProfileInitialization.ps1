@@ -18,6 +18,7 @@ function SyncDependancies{
 	$currentDay = $currentDate.DayofYear
 	$lastUpdate = $global:profileSettings.LastUpdate.DayofYear
 	$aa = $lastUpdate - $currentDay
+	write-host $aa
 	if($aa -lt 0){
 		write-host "Refreshing dependancies"
 		SyncPscx
@@ -42,7 +43,7 @@ function SyncPoshGit{
 	if(-not(Test-Path $poshgitProfile)){
 		write-host "Missing post-git dependancies - Installing"
 		Set-LocationFromPath ($dependancies)
-		Invoke-Expression "git clone https://github.com/dahlbyk/posh-git.git"
+		Invoke-Expression "git clone git@github.com:dahlbyk/posh-git.git"
 	}else{
 		Set-LocationFromPath ("$dependancies\posh-git")
 		Invoke-Expression "git pull"
@@ -54,7 +55,7 @@ function SyncPoshNpm{
 	if(-not(Test-Path $poshnpmProfile)){
 		write-host "Missing post-npm dependancies"
 		Set-LocationFromPath ($dependancies)
-		Invoke-Expression "git clone https://github.com/MSOpenTech/posh-npm.git"
+		Invoke-Expression "git clone git@github.com:MSOpenTech/posh-npm.git"
 	}else{
 		Set-LocationFromPath ("$dependancies\posh-npm")
 		Invoke-Expression "git pull"		
@@ -66,7 +67,7 @@ function SyncPoshHg{
 	if(-not(Test-Path $poshProfile)){
 		write-host "Missing post-hg dependancies"
 		Set-LocationFromPath ($dependancies)
-		Invoke-Expression "git clone https://github.com/JeremySkinner/posh-hg.git"
+		Invoke-Expression "git clone git@github.com:JeremySkinner/posh-hg.git"
 	}else{
 		Set-LocationFromPath ("$dependancies\posh-hg")
 		Invoke-Expression "git pull"
