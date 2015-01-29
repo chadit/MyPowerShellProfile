@@ -42,7 +42,7 @@ function Invoke-RubyTools{
 }
 
 function Invoke-NodeTools{
-	Invoke-Expression "choco install nodejs"
+	Invoke-Expression "choco install nodejs.install"
 }
 
 function Invoke-Python{

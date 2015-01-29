@@ -49,17 +49,23 @@ elseif(Test-LocationFromPath("\Cloud\SkyDrive")){
 
 
 function FindSetHomeDirectory{
-	$findHome = "\Projects\WindowsPowerShell\"
-
-	if (Test-Path $findHome) {
-	    $global:homedir = $findHome
+	$findHome = "\Projects\WindowsPowerShell"
+  
+	if (Test-Path "C:$findHome") {
+	 	write-host "setting home to $findHome"
+	    $global:homedir = "C:$findHome"
 	}else{
-		$findHome = "$dropbox\Documents\WindowsPowerShell\"
-		if (Test-Path $findHome) {
-	    	$global:homedir = $findHome
+		if (Test-Path "D:$findHome") {
+			write-host "setting home to $findHome"
+			$global:homedir = "D:$findHome"
 		}else{
-			Write-Host "home could not be found"
-		}
+			$findHome = "$dropbox\Documents\WindowsPowerShell"
+			if (Test-Path $findHome) {
+	    		$global:homedir = $findHome
+			}else{
+				Write-Host "home could not be found"
+			}
+		}		
 	}
 
 	# Check for and load profile.
@@ -68,7 +74,7 @@ function FindSetHomeDirectory{
 	if (Test-Path $location){
 		. $location
 	}else{
-		Write-Host "could not find profile.ps1"
+		Write-Host "could not find profile.ps1 -- $location"
 	}
 }
 
