@@ -183,7 +183,5 @@ function CheckRepoSettings{
 		$global:profileSettings.Name = Read-Host "Name: "
 	}
 
-
-
 	CreateUpdateSettings
 }

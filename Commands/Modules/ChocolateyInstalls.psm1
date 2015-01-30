@@ -17,10 +17,10 @@ function Invoke-RebuildDevBox{
 # write a function that stops ssh agent before this will work
 function Invoke-SourceTools{
 
-	Invoke-Expression "choco git.install"
+	Invoke-Expression "choco install git.install"
 	Invoke-Expression "choco install gitextensions"
 	Invoke-Expression "choco install git-credential-winstore"
-	Invoke-Expression "choco install poshgit"
+	#Invoke-Expression "choco install poshgit"
 	#Invoke-Expression "choco install gittfs"
 	#Invoke-Expression "choco install Git-TF"
 	Invoke-Expression "choco install git-flow-dependencies"
@@ -28,8 +28,8 @@ function Invoke-SourceTools{
 	#Invoke-Expression "regsvr32 /u 'C:\Program Files (x86)\Git\git-cheetah\git_shell_ext64.dll'"
 
 	Invoke-Expression "choco install hg"
-	Invoke-Expression "choco install posh-hg"
-	Invoke-Expression "choco install posh-git-hg"
+	#Invoke-Expression "choco install posh-hg"
+	#Invoke-Expression "choco install posh-git-hg"
 }
 
 #function Invoke-TFSTools{
