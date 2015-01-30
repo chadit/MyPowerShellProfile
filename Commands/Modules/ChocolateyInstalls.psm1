@@ -59,12 +59,7 @@ function Invoke-GeneralTools{
 	Invoke-Expression "choco install sublimetext3"
 	Invoke-Expression "choco install sublimetext3.packagecontrol"
 	Invoke-Expression "choco install markdownpad2"
-
-	#Invoke-Expression "choco install notepadplusplus.install"
-	#Invoke-Expression "choco install 7zip.install"
-	#Invoke-Expression "choco install vlc"
-	#Invoke-Expression "choco install paint.net"
-	#Invoke-Expression "choco install ChocolateyGUI"
+	Invoke-Expression "choco install nugetpackageexplorer"
 }
 
 function Invoke-DevelopmentTools{
@@ -85,4 +80,9 @@ function Invoke-Perl{
 function Invoke-PowerShell{
 	Invoke-Expression "choco install pscx"
 	Invoke-Expression "choco install PowerGUI"
+	Invoke-Expression "choco install sublimetext3.powershellalias"
+}
+
+function Invoke-Go{
+	Invoke-Expression "choco install golang"
 }
