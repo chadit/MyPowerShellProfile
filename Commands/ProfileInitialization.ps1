@@ -18,7 +18,6 @@ function SyncDependancies{
 	$currentDay = $currentDate.DayofYear
 	$lastUpdate = $global:profileSettings.LastUpdate.DayofYear
 	$aa = $lastUpdate - $currentDay
-	write-host $aa
 	if($aa -lt 0){
 		write-host "Refreshing dependancies"
 		SyncPscx
@@ -151,7 +150,7 @@ function ImportModules{
 	$commandsFolder = "$homedir\MyPowerShellProfile\Commands\Modules"
 	if (Test-Path $commandsFolder)
 	{	
-		write-host "Loading Modules"
+		write-host "Loading Modules" -foregroundcolor Cyan 
 		Import-Module $commandsFolder\CleanUpDocuments
 		Import-Module $commandsFolder\MyCommands
 		Import-Module $commandsFolder\MyCommandsGit
