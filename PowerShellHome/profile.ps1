@@ -3,7 +3,7 @@
 # 
 # Applies to all hosts, so only put things here that are global
 #
-
+write-host "starting powershell"
 # Helper functions for all interfaces
 function Test-LocationFromPath{
 	param ($path)
@@ -59,8 +59,9 @@ function FindSetProjectDirectory{
 	$findHome = "\Projects"
   
 	if (Test-Path "\\psf\Home$findHome") {
+		$findHome = "\\psf\Home$findHome"
 	    write-host "setting project home to $findHome"
-	    $global:projectdir = "C:$findHome"
+	    $global:projectdir = "$findHome"
 	    FindSetCreateDependancyDirectory
 	}else{
 		if (Test-Path "C:$findHome") {
