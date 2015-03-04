@@ -6,7 +6,7 @@ function InitializeAllDependancies{
 	InitPscx
 	InitPoshGit
 	InitPostNpm
-	InitPoshHg	
+	InitPoshHg
 }
 
 #----------------------------------------------------------------------#
@@ -57,7 +57,7 @@ function SyncPoshNpm{
 		Invoke-Expression "git clone git@github.com:MSOpenTech/posh-npm.git"
 	}else{
 		Set-LocationFromPath ("$dependancies\posh-npm")
-		Invoke-Expression "git pull"		
+		Invoke-Expression "git pull"
 	}
 }
 
@@ -80,9 +80,9 @@ function InitPscx{
 	$pscx = "C:\Program Files (x86)\PowerShell Community Extensions\Pscx3\Pscx"
 	if(Test-Path $pscx){
 		$scripts = resolve-path "$projectdir\WindowsPowerShell\MyPowerShellProfile\"
-		$pscxUserPreference = $pscx	
+		$pscxUserPreference = $pscx
 		# Modules are stored here
-		$env:PSModulePath = join-path $pscx modules
+	#	$env:PSModulePath = join-path $pscx modules
 	}else{
 		Write-Host "failed to find pscx folder"
 		Break
@@ -94,11 +94,11 @@ function InitPscx{
 #----------------------------------------------------------------------#
 function InitPoshGit{
 	$poshgitProfile = "$projectdir\Dependancies\posh-git\profile.example.ps1"
-	
+
 	if (Test-Path $poshgitProfile)
 	{
-		write-host "Loading Posh-git" -foregroundcolor Cyan 
-		Import-Module $poshgitProfile	
+		write-host "Loading Posh-git" -foregroundcolor Cyan
+		Import-Module $poshgitProfile
 	}
 	else
 	{
@@ -112,11 +112,11 @@ function InitPoshGit{
 #----------------------------------------------------------------------#
 function InitPostNpm{
 	$poshnpmProfile = "$projectdir\Dependancies\posh-npm\profile.example.ps1"
-	
+
 	if (Test-Path $poshnpmProfile)
 	{
-		write-host "Loading Posh-npm" -foregroundcolor Cyan 
-		Import-Module $poshnpmProfile 	
+		write-host "Loading Posh-npm" -foregroundcolor Cyan
+		Import-Module $poshnpmProfile
 	}
 	else
 	{
@@ -130,11 +130,11 @@ function InitPostNpm{
 #----------------------------------------------------------------------#
 function InitPoshHg{
 	$poshProfile = "$projectdir\Dependancies\posh-hg\profile.example.ps1"
-	
+
 	if (Test-Path $poshProfile)
-	{		
-		write-host "Loading Posh-hg" -foregroundcolor Cyan 
-		Import-Module $poshProfile 	
+	{
+		write-host "Loading Posh-hg" -foregroundcolor Cyan
+		Import-Module $poshProfile
 	}
 	else
 	{
@@ -149,8 +149,8 @@ function InitPoshHg{
 function ImportModules{
 	$commandsFolder = "$homedir\MyPowerShellProfile\Commands\Modules"
 	if (Test-Path $commandsFolder)
-	{	
-		write-host "Loading Modules" -foregroundcolor Cyan 
+	{
+		write-host "Loading Modules" -foregroundcolor Cyan
 		Import-Module $commandsFolder\CleanUpDocuments
 		Import-Module $commandsFolder\MyCommands
 		Import-Module $commandsFolder\MyCommandsGit
