@@ -1,5 +1,5 @@
 function MirrorDrive{
-	param([string] $source = "F", [string]$destination = "Z")
+	param([string] $source = "Y", [string]$destination = "Z")
 	$source += ":\"
 	$destination += ":\"
 

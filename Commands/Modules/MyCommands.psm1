@@ -28,6 +28,24 @@ function GetForSqlServer{
 	return $sqlInstalled
 }
 
+function Get-DirectorySize() {
+  param ([string]$root = $(resolve-path .))
+  gci -re $root |
+    ?{ -not $_.PSIsContainer } | 
+    measure-object -sum -property Length
+}
+
+function Test-DriveExist { 
+    param($driveletter)  
+    (New-Object System.IO.DriveInfo($driveletter)).DriveType -ne 'NoRootDirectory'   
+} 
+
+function Update-DiskDrive {
+	$location = Get-Location
+	1..26 | %{Set-Location $([char]($_ + 64) + ":") -ErrorAction SilentlyContinue}
+	Set-Location $location
+}
+
 
 
 function MoveFilesOlderThan{
@@ -40,86 +58,15 @@ Get-ChildItem -Recurse $arSourceFolders | where {$_.Creationtime -lt (Get-Date).
 Write-host -foregroundcolor 'green' "Done :)";
 }
 
-# function Set-WallpaperRemote{
-  # param([string] $computerName = "fmmistsmith"
-  
-  # Const HKEY_CURRENT_USER = &H80000001
-  
-  # Set objReg = GetObject("winmgmts:\\" & computerName & "\root\default:StdRegProv")
-  
-  
-# }
-
-# Function Get-WallPaper()
-# {
- # $wp=Get-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name wallpaper
- # if(!$wp.WallPaper) 
-   # { "Wall paper is not set" }
- # Else
-  # {"Wall paper is set to $($wp.WallPaper)" }
-# }
-
-# Function Set-WallPaper($Value)
-# {
- # Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name wallpaper -value $value
- # rundll32.exe user32.dll, UpdatePerUserSystemParameters
-# }
-
-
-
-#Does not work at the moment
-
-# function TBASE-3rdParty{
-# $folderLocation = "$dropbox\Source\ThirdParty\"
-# Get-ChildItem $folderLocation | ? {$_.Attributes -eq "Directory"}| ForEach-Object { 
-# [string]$fullFolderPath = $_.FullName
-		
-# $ScriptBlock = {
-	# param($fullFolderPath1 )
-		  
-	# #$fullFolderPath2 = $fullFolderPath1.ToString()
-	# $whichSourceControl = "git"
-
-
-	# #Check for Git to SVN bridge
-	# $folderToCheck = $fullFolderPath1 + "\.git\svn"
-	# if (Test-Path $folderToCheck.Trim()){
-		 # $whichSourceControl = "svn"
-	# }
-
-	# #Check for Git to TFS bridge
-	# $folderToCheck = $fullFolderPath1 + "\.git\tfs"
-		# if (Test-Path $folderToCheck.Trim()){
-		# $whichSourceControl = "tfs"
-	# }		  
-		  
-	# $message = "Setting location to $fullFolderPath1 \nrun git command for $whichSourceControl" 
-	# write-host $message -foregroundcolor DarkYellow
-	# Set-Location $fullFolderPath1
-			# Start-Sleep -m 1000
-			# if ($whichSourceControl -eq "tfs"){
-					# git tpull
-			
-			# }
-
-			# if ($whichSourceControl -eq "git"){
-					# git pull
-			# }
-
-			# if ($whichSourceControl -eq "svn"){
-					# git spull
-			# }
-
-			# Start-Sleep -m 10000
-# }
-
-	# # Execute the jobs in parallel
-
-	# Start-Job $ScriptBlock -Name $_.Name -ArgumentList $fullFolderPath
-# }
-
-# # Getting the information back from the jobs
-
-# Get-Job | Receive-Job
-# }
-
+function Find-PathLocation([String] $path ){	
+	# test if on C or D drive, can be expanded
+	if (Test-Path "D:$path"){
+		return "D:$path"
+	}else{
+		if(Test-Path "C:$path")
+		{
+			return "C:$path"
+		}
+	}	
+	return ""
+}
